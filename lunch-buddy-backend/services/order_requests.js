@@ -7,14 +7,14 @@ orderRequestsService.createOrderRequest = (order_id, user_id) => {
 }
 
 orderRequestsService.addOrderItems = (id, items, total) => {
-    return db.none('UPDATE order_requests SET order_items = ${items}, total = ${total} WHERE id = ${id};')
+    return db.none('UPDATE order_requests SET order_items = ${items}, total = ${total} WHERE id = ${id};', {id, items, total})
 }
 
 orderRequestsService.getOrderRequestById = (id) => {
-    return db.one('SELECT * FROM order_requests WHERE id = ${id}')
+    return db.one('SELECT * FROM order_requests WHERE id = ${id}', {id})
 }
 
 orderRequestsService.getOrderRequestsByOrderId = (order_id) => {
-    return db.one('SELECT * FROM order_requests WHERE order_id = ${order_id}')
+    return db.one('SELECT * FROM order_requests WHERE order_id = ${order_id}', {order_id})
 }
 module.exports = orderRequestsService
