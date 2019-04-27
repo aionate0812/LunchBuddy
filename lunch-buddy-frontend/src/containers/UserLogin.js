@@ -2,7 +2,7 @@ import React from 'react'
 
 class UserLogin extends React.Component {
     state = {
-        Username:'',
+        input:'',
         error: ''
     }
 
@@ -21,7 +21,7 @@ class UserLogin extends React.Component {
                         <form style={{ 'width': '100%'}} >
                             <div className="input-group flex-nowrap my-3">
 
-                                <input type="text" name='Username' className="form-control" placeholder="Enter Username Here" aria-label="Username" aria-describedby="addon-wrapping" onChange={this.handleChange} />
+                                <input type="text" name='input' className="form-control" placeholder="Enter Username or Email Here" aria-label="Username or Email" aria-describedby="addon-wrapping" onChange={this.handleChange} />
                             </div>
                             <div style={{'textAlign': 'center'}}>
                                 <button type="button" className="btn btn-primary btn-md">Login</button>
