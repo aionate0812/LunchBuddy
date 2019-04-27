@@ -6,7 +6,8 @@ CREATE DATABASE lunch_buddy;
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
-    email_or_username VARCHAR NOT NULL UNIQUE
+    email VARCHAR NOT NULL UNIQUE,
+    username VARCHAR NOT NULL UNIQUE
 );
 
 CREATE TABLE orders
@@ -27,8 +28,8 @@ CREATE TABLE order_requests
 );
 
 INSERT INTO users
-    (email_or_username)
+    (email , username)
 VALUES
-    ('test@test.com'),
-    ('username1'),
-    ('username2');
+    ('test@test.com', 'username'),
+    ('test1@test.com','username1'),
+    ('test2@test.com','username2');
