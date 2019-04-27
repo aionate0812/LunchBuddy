@@ -30,7 +30,13 @@ orderRequestsRouter.get('orders/:order_id', (req, res) => {
 orderRequestsRouter.get('/user/orders/:user_id', (req, res) => {
     const { user_id } = req.params
 
-    orderRequestsService.
+    // orderRequestsService.getOrderRequestsByUserId(user_id)
+    // .then( orders => {
+    //     orderIds = orders.map( order => {
+    //         return 
+    //     })
+    // })
+    
 })
 
 orderRequestsRouter.post('/', (req, res) => {
