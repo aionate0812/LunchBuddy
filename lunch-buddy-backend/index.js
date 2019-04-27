@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 
 
 
-app.use('/order_request', orderRequestsRouter)
+app.use('/order_requests', orderRequestsRouter)
 app.get('/', (req, res) => {
     res.send('hello world')
 })

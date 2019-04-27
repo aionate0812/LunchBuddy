@@ -27,6 +27,12 @@ orderRequestsRouter.get('orders/:order_id', (req, res) => {
     })
 })
 
+orderRequestsRouter.get('/user/orders/:user_id', (req, res) => {
+    const { user_id } = req.params
+
+    orderRequestsService.
+})
+
 orderRequestsRouter.post('/', (req, res) => {
     const { order_id, user_id } = req.body
 
