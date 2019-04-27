@@ -3,12 +3,9 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import UserLogin from './containers/UserLogin';
-<<<<<<< HEAD
 import SearchResults from './containers/RestSearchResults/RestSearchResults';
-=======
 import Order from './containers/Order/Order'
 import Dashboard from './containers/Dashboard/Dashboard'
->>>>>>> master
 
 class App extends Component {
   render() {
