@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Redirect, Link} from 'react-router-dom';
 
 const response = {
   "results_found": 57,
@@ -61,55 +62,61 @@ const response = {
     }
   ]
 }
-console.log("Res", response.restaurants[0].restaurant.user_rating.aggregate_rating)
-console.log("Use", response.restaurants[0].restaurant.user_rating.aggregate_rating)
 
 class RestaurantSearchResults extends React.Component {
     state = {
         resultsFound: 0,
+        order: 0,
         results: [],
-        user: [],
+        user: "",
     }
 
     componentDidMount() {
       this.setState({
+        order: this.props.match.url.split('/')[2],
         resultsFound: response.results_found,
-        results: response.restaurants
+        results: response.restaurants,
+        user: JSON.parse(localStorage.getItem('user')) || null,
       })
     }
 
+
     render () {
+      console.log("Mickey", this.props.match.url.split('/')[2])
         return(
-            <div className="container-fluid">
+            <div className="container">
+            {
+             // this.state.user === null ? <Redirect to='/login'/> : null
+            }
+              <div className="row my-4">Results: {this.state.resultsFound}</div>
               <div className="row">
-              <div className="row">Results: {this.state.resultsFound}</div>
-                <div className="col-1"></div>
-                <div className="col-10">
+                <div className="col card">
                 {
                   this.state.results.length > 0 ? this.state.results.map((e,i)=>{
                     return <>
-                      <div className="row" key={i}>
-                        <div className ="col-1"></div>
-                        <div className="col-2">
+                      <Link to={`/order/${this.state.order}/menu/${e.restaurant.R.res_id}`} style={{textDecoration: "none", color: "black"}}><div className="row card-body" key={i} >
+                        <div className="col-3">
                           <img src={e.restaurant.featured_image} style={{height: "100px"}}/>
                         </div>
                         <div className="col-3">
                           <p>{e.restaurant.name}</p>
+                          <p> Cusine {e.restaurant.cuisines}</p>
                         </div>
-                        <div className="col-2">
+                        <div className="col-3">
                           <p> Rated {e.restaurant.user_rating.aggregate_rating}/5</p>
                           <p> {e.restaurant.user_rating.votes} Votes</p>
                         </div>
-                        <div className="col-2">
-                          <p> Cusine {e.restaurant.cuisines}</p>
+                        <div className="col-3">
+                        <p>{e.restaurant.location.address}</p>
+                        <p>{e.restaurant.location.locality}</p>
+                        <p>{e.restaurant.location.city}, {e.restaurant.location.zipcode}</p>
                         </div>
-                        <div className ="col-1"></div>
                       </div>
+                      </Link>
                     </>
                   }) : null
                 }
                 </div>
-                <div className="col-1"></div>
               </div>
             </div>
         )
