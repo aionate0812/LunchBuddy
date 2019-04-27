@@ -5,11 +5,14 @@ const app = express()
 const port = 5000
 
 
+const orderRequestsRouter = require('./routes/order_requests')
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 
+
+app.use('/order_request', orderRequestsRouter)
 app.get('/', (req, res) => {
     res.send('hello world')
 })

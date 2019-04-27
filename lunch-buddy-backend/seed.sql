@@ -28,6 +28,15 @@ CREATE TABLE order_requests
     total INT NULL
 );
 
+CREATE TABLE orders
+(
+    id SERIAL PRIMARY KEY,
+    order_name VARCHAR NOT NULL,
+    order_creator INT REFERENCES users(id),
+    order_status VARCHAR NOT NULL,
+    restaurant_id INT NOT NULL
+);
+
 INSERT INTO users
     (email, username)
 VALUES
