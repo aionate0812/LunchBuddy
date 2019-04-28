@@ -51,8 +51,8 @@ class Dashboard extends React.Component {
         return (
             <>
                 <div className='container-fluid mt-5' style={{fontFamily: "Arvo"}}>
-                <div className='container-fluid' style={{backgroundImage: `url(${healthyBackground})`, color: "white" }}>
-                    <h1 style={{textAlign: "center"}} className="mb-5">Welcome {user.input}</h1>
+                <div className='container-fluid' style={{backgroundImage: `url(${healthyBackground})`, color: "brown" }}>
+                    <h1 style={{textAlign: "center", fontWeight: "bold"}} className="mb-5">Welcome {user.input}</h1>
                 </div>
                 <div className='row'>
                 <div className="col">
@@ -92,7 +92,7 @@ class Dashboard extends React.Component {
                                             <li className='list-group-item' key={i}>
                                                 <Link to={`/order/${id}/invite`}>{order_name}</Link>
                                                 <ul>
-                                                    <li><strong>Restauranst</strong> {restaurant_name}</li>
+                                                    <li><strong>Restaurant</strong> {restaurant_name}</li>
                                                 </ul>
                                             </li>
                                         )

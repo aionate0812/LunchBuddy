@@ -17,7 +17,7 @@ const NavBar = props => {
                             <Link className="nav-link" to="/" style={{color: "white"}}> Home </Link>
                         </li>
                         <li className="nav-item active">
-                            <Link className="nav-link" to="/order" style={{color: "white"}}> Create Order </Link>
+                            <Link className="nav-link" to="/search" style={{color: "white"}}> Create Order </Link>
                         </li>
                     </ul>
                 </div>
