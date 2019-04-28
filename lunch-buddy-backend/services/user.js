@@ -1,10 +1,10 @@
-const  db  = require('./dbConnect')
+const db = require('./dbConnect')
 
 
 const UserService = {}
 
-UserService.createUser = (email_or_username) => {
-    return db.one('INSERT INTO users (email_or_username) VALUES (${email_or_username}) RETURNING id', { email_or_username })
+UserService.createUser = (email, username) => {
+    return db.one('INSERT INTO users (email, username) VALUES (${email}, ${username}) RETURNING id', { email, username })
 }
 
 UserService.getUserbyID = (id) => {
@@ -12,7 +12,7 @@ UserService.getUserbyID = (id) => {
 }
 
 UserService.readUserbyEmail = (email_or_username) => {
-    return db.one('SELECT * from users WHERE email=${email_or_username}', { email_or_username})
+    return db.one('SELECT * from users WHERE email=${email_or_username}', { email_or_username })
 }
 
 UserService.readUserbyUsername = (email_or_username) => {
