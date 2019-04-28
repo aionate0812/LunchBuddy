@@ -31,7 +31,7 @@ class OwedNoti extends React.Component {
     render() {
         return (
             <div className="card" style={{"width": "18rem", "textAlign": "center"}}>
-                <div className="card-header">
+                <div className="card-header" style={{backgroundColor: "black", color: "white"}}>
                     People You Owe
                     </div>
                 <ul className="list-group list-group-flush" >
@@ -41,7 +41,7 @@ class OwedNoti extends React.Component {
                             return (
                                 <>
                             <li className="list-group-item">{e.name} - ${e.amount}</li>
-                            <button type="button" className="btn btn-outline-primary">Pay Now</button>
+                            <button type="button" className="btn btn-outline-success">Pay Now</button>
                             </>
                             )
                         })
@@ -49,7 +49,7 @@ class OwedNoti extends React.Component {
                 </ul>
                 <div className="card-footer">
                     TOTAL OWED = 123.50
-                    <button type="button" className="btn btn-outline-primary my-2">Pay Everyone Now</button>   
+                    <button type="button" className="btn btn-outline-success my-2">Pay Everyone Now</button>   
                 </div>
             </div>
         )

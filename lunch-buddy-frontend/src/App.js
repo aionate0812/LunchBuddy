@@ -3,7 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import UserLogin from './containers/UserLogin';
-import Menuview from './containers/Restaurantmenu/restaurantmenu';
+import Menuview from './containers/Restaurantmenu/copy';
 import SearchResults from './containers/RestSearchResults/RestSearchResults';
 import Order from './containers/Order/Order'
 import Dashboard from './containers/Dashboard/Dashboard'
@@ -19,7 +19,7 @@ class App extends Component {
           <Route path='/' component={NavBar} />
           <Switch>
           <Route path='/' exact component={UserLogin} />
-            <Route path='/menuview/:id' exact component={Menuview} />
+            <Route path='/menuview/:res_id' exact component={Menuview} />
             <Route path='/search/results' exact component={SearchResults} />
             <Route path='/search' exact component={SearchResults} />
             <Route path='/order/:id' exact />
