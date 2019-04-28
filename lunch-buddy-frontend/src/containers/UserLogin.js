@@ -6,11 +6,20 @@ class UserLogin extends React.Component {
     state = {
         input: '',
         user_id: '',
+        createUsername: '',
+        createEmail: '',
         email: '',
         username: '',
         error: ''
     }
 
+    componentDidMount() {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            this.props.history.push('/dashboard')
+        } 
+    }
+    
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
         console.log(this.state)
@@ -45,6 +54,33 @@ class UserLogin extends React.Component {
 
     }
 
+    handleCreateSubmit = (e) => {
+        e.preventDefault()
+
+        axios.post('http://localhost:5000/user/create', {
+            username: this.state.createUsername,
+            email: this.state.createEmail
+        })
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    user_id: res.data.data.id,
+                })
+            })
+            .then(() => {
+                console.log(this.state)
+                localStorage.setItem('user', JSON.stringify(this.state))
+            })
+            .then(() => {
+                this.props.history.push('/dashboard')
+            })
+            .catch(err => {
+                this.setState({
+                    error: err.toString()
+                })
+            })
+    }
+
     render() {
         return (
             <>
@@ -52,9 +88,9 @@ class UserLogin extends React.Component {
                 <div className="col-xs-12 py-2" style={{ height: "40px", textAlign: "center", backgroundColor: "black", color: "white"}}>Please Login to Find Your Lunch Buddy</div>
                 <div className='container my-auto' style={{fontFamily: "Arvo"}}>
                     <div className='row'>
-                    {
-                     this.state.error   
-                    }
+                        {
+                            this.state.error
+                        }
                         <form style={{ 'width': '100%' }} >
                             <div className="input-group flex-nowrap my-3">
                             <div className="col-8">
@@ -66,6 +102,25 @@ class UserLogin extends React.Component {
                             </div>
                         </form>
                         <img src={background} alt="healthy lunch" style={{width: "100%"}}/>
+                    </div>
+                    <hr />
+                </div>
+                <br />
+                <div className="col-xs-12" style={{ "height": "75px", "textAlign": "center" }}>Or Create An Account</div>
+                <div className='container my-auto'>
+                    <div className='row'>
+                        {
+                            this.state.error
+                        }
+                        <form style={{ 'width': '100%' }} >
+                            <div className="input-group flex-nowrap my-3">
+                                <input type="text" name='createEmail' className="form-control" placeholder="foodLover@example.com" aria-label="Create Email" aria-describedby="addon-wrapping" onChange={this.handleChange} />
+                                <input type="text" name='createUsername' className="form-control" placeholder="Enter Username" aria-label="Create Username" aria-describedby="addon-wrapping" onChange={this.handleChange} />
+                            </div>
+                            <div style={{ 'textAlign': 'center' }}>
+                                <button type="button" className="btn btn-secondary btn-md" onClick={this.handleCreateSubmit}>Create Account</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </>
