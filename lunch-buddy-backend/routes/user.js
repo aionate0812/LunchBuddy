@@ -19,10 +19,26 @@ userRouter.post('/', (req, res) => {
             .then(data => {
                 res.json({ data })
             })
-            .catch( err => {
+            .catch(err => {
                 console.log(err.toString())
             })
     }
+})
+
+userRouter.post('/create', (req, res) => {
+    const { email, username } = req.body
+
+    if (!email.includes('@')) {
+        throw new error('please enter a valid email')
+    }
+
+    UserService.createUser(email, username)
+        .then(data => {
+            res.json({ data })
+        })
+        .catch(err => {
+            console.log(err.toString())
+        })
 })
 
 userRouter.get('/:id', (req, res) => {

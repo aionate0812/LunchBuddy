@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import OwedNoti from '../../components/OwedNoti/OwedNoti';
 
 const root = 'http://localhost:5000'
 const orderRequestsEndpointBase = '/order_request/'
@@ -8,15 +9,15 @@ const ordersEndpointBase = '/orders/'
 
 const getOrderInvitations = (user_id) => {
     return axios({
-        url:`${orderRequestsEndpointBase}user/orders/${user_id}`,
-        baseURL:root
+        url: `${orderRequestsEndpointBase}user/orders/${user_id}`,
+        baseURL: root
     })
 }
 
 const getOrdersCreated = (user_id) => {
     return axios({
-        url:`${ordersEndpointBase}user/${user_id}`,
-        baseURL:root
+        url: `${ordersEndpointBase}user/${user_id}`,
+        baseURL: root
     })
 }
 
@@ -38,16 +39,24 @@ class Dashboard extends React.Component {
         } else {
         const orderInvitations = await getOrderInvitations(user.user_id)
         const ordersCreated = await getOrdersCreated(user.user_id)
+        console.log(ordersCreated)
         this.setState({order_invitations:orderInvitations.data.orders, orders_created:ordersCreated.data.orders, user})
         }
     }
 
     render() {
-        const {user, order_invitations, orders_created} = this.state
-        return(
+        const { user, order_invitations, orders_created } = this.state
+        return (
             <>
+
                 <div className='container mt-5'>
+                <div className='row'>
                     <h1>Welcome {user.username}</h1>
+                    <div aria-live="polite" aria-atomic="true" style={{ "position": "relative", "min-height": "0" }}>
+                    <div style={{ "position": "absolute", "top": "0", "right": "0" }}>
+                        <OwedNoti />
+                     </div>
+                </div>
                         <div className='row mt-4 justify-content-around'>
                             <div style={{height:'300px'}}>
                                 <h5>Order Invitations:</h5>
@@ -87,10 +96,13 @@ class Dashboard extends React.Component {
                                 </ul>
                             </div>
                         </div>
+                        </div>
                 </div>
             </>
         )
     }
 }
+
+
 
 export default Dashboard

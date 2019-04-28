@@ -26,7 +26,7 @@ orderRequestsRouter.get('/:id', (req, res) => {
         if (!doc.exists) {
           console.log('No such document!');
         } else {
-          console.log('Document data:', doc.data());
+          
           res.json({order_request:doc.data()})
         }
       })
@@ -96,11 +96,9 @@ orderRequestsRouter.get('/orders/:order_id', (req, res) => {
 
 orderRequestsRouter.get('/user/orders/:user_id', async (req, res) => {
     const { user_id } = req.params
-    console.log(user_id)
     const orderRequests = db.collection('order_requests');
     const query = orderRequests.where('user_id', '==', user_id).get()
     .then(snapshot => {
-        console.log(snapshot)
     if (snapshot.empty) {
       console.log('No matching documents.');
       return;

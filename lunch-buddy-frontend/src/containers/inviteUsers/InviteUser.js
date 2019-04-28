@@ -144,7 +144,7 @@ class InviteUsers extends React.Component {
                             <button type="submit" className="btn btn-primary mt-3">Submit</button>
                             </div>
                         </form> 
-                    : null//<Redirect to='/' />
+                    : null
                 }
                 {
                     this.state.order_requests.map( (orderRequest, i) => {
