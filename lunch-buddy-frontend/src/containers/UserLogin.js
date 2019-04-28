@@ -12,6 +12,13 @@ class UserLogin extends React.Component {
         error: ''
     }
 
+    componentDidMount() {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            this.props.history.push('/dashboard')
+        } 
+    }
+    
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
         console.log(this.state)
@@ -43,8 +50,9 @@ class UserLogin extends React.Component {
                     error: err.toString()
                 })
             })
-}
- 
+
+    }
+
     handleCreateSubmit = (e) => {
         e.preventDefault()
 
