@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const root = 'http://localhost:5000'
-const orderRequestsEndpointBase = '/order_requests/'
+const orderRequestsEndpointBase = '/order_request/'
 
 const getOrderInvitations = (user_id) => {
     return axios({
@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
         super(props)
         this.state = {
             user:{username:'Alex'},
-            order_invitations:[{id:1, name:'Taco Tuesday', restaurant_name:'Tacos Trejo', order_creator_name:'Alex', }],
+            order_invitations:[],
             orders_created:[{id:1, name:'Taco Tuesday', restaurant_name:'Tacos Trejo', order_creator_name:'Alex', }]
         }
     }
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
     async componentDidMount() {
         // const user = localStorage.getItem('user')
         const orderInvitations = await getOrderInvitations(2)
-        console.log(orderInvitations)
+        this.setState({order_invitations:orderInvitations.data.orders})
 
     }
 
@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
                         <ul className='mt-3'>
                             {
                                 order_invitations.map( (order, i) => {
-                                    const {id, name:order_name, restaurant_name, order_creator_name} = order
+                                    const {id, order_name, restaurant_name, order_creator_name} = order
                                     return (
                                         <li key={i}>
                                             <Link to={`/order/${id}`}>{order_name}</Link>

@@ -2,6 +2,7 @@ const express = require('express')
 const orderRequestsRouter = express.Router()
 
 const orderRequestsService = require('../services/order_requests')
+const ordersService = require('../services/orders')
 
 orderRequestsRouter.get('/:id', (req, res) => {
     const { id } = req.params
@@ -27,15 +28,20 @@ orderRequestsRouter.get('orders/:order_id', (req, res) => {
     })
 })
 
-orderRequestsRouter.get('/user/orders/:user_id', (req, res) => {
+orderRequestsRouter.get('/user/orders/:user_id', async (req, res) => {
     const { user_id } = req.params
-
-    // orderRequestsService.getOrderRequestsByUserId(user_id)
-    // .then( orders => {
-    //     orderIds = orders.map( order => {
-    //         return 
-    //     })
-    // })
+    const orders = await orderRequestsService.getOrderRequestsByUserId(user_id)
+    console.log(orders)
+    const orderIds = orders.map( order => {
+        return ordersService.readOrder(order.order_id)
+    })
+    Promise.all(orderIds)
+    .then( allOrders => {
+        res.json({orders:allOrders})
+    }, err => {
+        res.json({msg:'Could not get any orders'})
+        console.log(err)
+    })
     
 })
 
