@@ -3,6 +3,7 @@ import React from 'react'
 class OwedNoti extends React.Component {
 
     state = {
+        user: [],
         peopleOwed: [
             {
                 name: 'Mo',
@@ -19,17 +20,13 @@ class OwedNoti extends React.Component {
         ]
     }
 
-    componentDidMount = async () => {
+   
 
-        // axios.get('http://localhost:5000/')
-    }
-
-    getTotal = () => {
-        
-    }
-
+    
     render() {
+        console.log(this.state)
         return (
+            <>
             <div className="card" style={{"width": "18rem", "textAlign": "center"}}>
                 <div className="card-header">
                     People You Owe
@@ -40,7 +37,7 @@ class OwedNoti extends React.Component {
                         this.state.peopleOwed.map((e, i ) => {
                             return (
                                 <>
-                            <li className="list-group-item">{e.name} - ${e.amount}</li>
+                            <li className="list-group-item" key={i}>{e.name} - ${e.amount}</li>
                             <button type="button" className="btn btn-outline-primary">Pay Now</button>
                             </>
                             )
@@ -52,6 +49,7 @@ class OwedNoti extends React.Component {
                     <button type="button" className="btn btn-outline-primary my-2">Pay Everyone Now</button>   
                 </div>
             </div>
+            </>
         )
     }
 }
