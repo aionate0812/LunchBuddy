@@ -9,6 +9,7 @@ import Order from './containers/Order/Order'
 import Dashboard from './containers/Dashboard/Dashboard'
 import Error404 from './containers/Error404/Error404'
 import InviteUser from './containers/inviteUsers/InviteUser'
+import './index.css'
 
 class App extends Component {
   render() {
