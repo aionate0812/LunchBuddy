@@ -4,7 +4,7 @@ import axios from 'axios'
 import OwedNoti from '../../components/OwedNoti/OwedNoti'
 import healthyBackground from '../../assets/healthy-lunch.jpg'
 
-const root = 'http://localhost:5000'
+const root = 'http://zhost:5000'
 const orderRequestsEndpointBase = '/order_request/'
 const ordersEndpointBase = '/orders/'
 
