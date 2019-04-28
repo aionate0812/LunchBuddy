@@ -18,9 +18,9 @@ class App extends Component {
           <Route path='/' component={NavBar} />
           <Switch>
           <Route path='/' exact component={UserLogin} />
-            <Route path='/menuview' exact component={Menuview} />
+            <Route path='/menuview/:id' exact component={Menuview} />
             <Route path='/search/results' exact component={SearchResults} />
-            <Route path='/search' exact />
+            <Route path='/search' exact component={SearchResults} />
             <Route path='/order/:id' exact />
             <Route path='/order/:id/invite' exact component={InviteUser}/>
             <Route path='/order' exact component={Order} />

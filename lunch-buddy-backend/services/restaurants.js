@@ -5,9 +5,9 @@ const axios = require('axios');
 const url = 'https://developers.zomato.com/api/v2.1/search';
 
 restaurantsRouter.get('/', (req, res) => {
-    const { lon, lat, query } = req.body;
+    const { lat, lon,  query } = req.body;
 
-    axios({
+    return axios({
         url,
         // param: {
         //     entity_id: 280,
@@ -17,16 +17,16 @@ restaurantsRouter.get('/', (req, res) => {
         //     q,
         // },
         params: {
-            lon,
             lat,
+            lon,
             query,
-            count: 9
+            count: 10,
+            sort: "real_distance"
         },
-        headers: { 'user-key': 'cd295cc49e5c8dfd776d34174be1b9af' }
+        headers: { 'user-key': '5eaf1c7a70e10a625274f3a35cd689bc' },
     })
         .then(response => {
             res.json({ data: response.data })
-            console.log(res)
         })
         .catch(error => {
             console.log(error);

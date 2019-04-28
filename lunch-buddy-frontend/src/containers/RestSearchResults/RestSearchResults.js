@@ -6,18 +6,59 @@ import Search from '../../components/Search/search';
 
 const port = 5000
 
-const search = (lon, lat, query, count=9) =>{
+/*const search = (lat, lon, query, count=9) =>{
   return axios({
       method: "get",
       url: `http://localhost:${port}/locations`,
       data: {
-          lon: lon,
           lat: lat,
+          lon: lon,
           query: query,
           count: count
       }
   })
+}*/
+
+const menu = (res_id) =>{
+  return axios({
+    method: "get", 
+    url: `https://cors-anywhere.herokuapp.com/https://developers.zomato.com/api/v2.1/dailymenu`,
+    params: {
+      res_id: res_id
+    },
+    headers: { 'user-key': 'cd295cc49e5c8dfd776d34174be1b9af' }
+  })
 }
+
+const city = (entity=8425, type="city") =>{
+  return axios({
+    method: "get", 
+    url: `https://cors-anywhere.herokuapp.com/https://developers.zomato.com/api/v2.1/location_details`,
+    params: {
+      entity_id: entity,
+      entity_type: type
+      
+    },
+    headers: { 'user-key': 'cd295cc49e5c8dfd776d34174be1b9af' }
+  })
+}
+
+const search = (query, lat, lon, count=10) =>{
+  return axios({
+    method: "get", 
+    url: `https://cors-anywhere.herokuapp.com/https://developers.zomato.com/api/v2.1/search`,
+    params: {
+      q: query,
+      count: count,
+      lat: lat,
+      lon: lon,
+      radius: 1600,
+      sort: "real_distance"
+    },
+    headers: { 'user-key': 'cd295cc49e5c8dfd776d34174be1b9af' }
+  })
+}
+
  const image = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTBROkHgxHvy24l2E3ccmm9JirhdfIOK3VcCf8JpAXBT0UkHmHxA`;
 
 class RestaurantSearchResults extends React.Component {
@@ -32,6 +73,11 @@ class RestaurantSearchResults extends React.Component {
     }
 
     componentDidMount() {
+      city()
+      .then((response)=>{
+        console.log("Mip", response)
+        this.setState({results: response.data.best_rated_restaurant})
+      })
       navigator.geolocation.getCurrentPosition(location => {
         this.setState({
             order: this.props.match.url.split('/')[2],
@@ -48,19 +94,21 @@ class RestaurantSearchResults extends React.Component {
 
     handleSearch= (e) => {
       e.preventDefault();
-      search(this.state.locationLat, this.state.locationLon, this.setState.input)
+      search(this.state.input, this.state.locationLat, this.state.locationLon, )
       .then((response)=>{
-        this.setState({
-          resultsFound: response.data.data.results_shown,
-          results: response.data.data.restaurants,
-        })
-          console.log("Rep", response)
-      })
-  }
+        console.log("Boom",response)
+            this.setState({
+              resultsFound: this.state.results.length,
+              results: response.data.restaurants,
+            })
+          })
+          .catch((e)=>{
+            console.log(e)
+          })
+        }
 
 
     render () {
-      console.log("State", this.state)
         return(
             <div className="container">
             <Search found={this.state.resultsFound} results={this.state.results} search={this.handleSearch} change={this.handleOnChange} input={this.state.input}/>
@@ -75,7 +123,7 @@ class RestaurantSearchResults extends React.Component {
                {
                  this.state.results.length > 0 ? this.state.results.map((e,i)=>{
                    return <>
-                     <Link to={`/menu/${e.restaurant.R.res_id}`} style={{textDecoration: "none", color: "black"}}><div className="row card-body" key={i} >
+                     <Link to={`/menuview/${e.restaurant.R.res_id}`} style={{textDecoration: "none", color: "black"}}><div className="row card-body" key={i} >
                        <div className="col-3">
                          <img src={e.restaurant.featured_image||e.restaurant.featured_image||image} alt={e.restaurant.name} style={{height: "100px"}}/>
                        </div>

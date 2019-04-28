@@ -8,6 +8,7 @@ class UserLogin extends React.Component {
         createUsername: '',
         createEmail: '',
         email: '',
+        username: '',
         error: ''
     }
 
@@ -26,7 +27,8 @@ class UserLogin extends React.Component {
                 console.log(res)
                 this.setState({
                     user_id: res.data.data.id,
-                    email: res.data.data.email
+                    email: res.data.data.email,
+                    username: res.data.data.username
                 })
             })
             .then(() => {
@@ -42,6 +44,7 @@ class UserLogin extends React.Component {
                 })
             })
 
+<<<<<<< HEAD
     }
 
     handleCreateSubmit = (e) => {
@@ -69,6 +72,8 @@ class UserLogin extends React.Component {
                     error: err.toString()
                 })
             })
+=======
+>>>>>>> master
     }
 
     render() {
