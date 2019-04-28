@@ -15,8 +15,7 @@ CREATE TABLE orders
     id SERIAL PRIMARY KEY,
     order_name VARCHAR NOT NULL,
     order_creator INT REFERENCES users(id),
-    order_status VARCHAR NOT NULL,
-
+    order_status VARCHAR NOT NULL
 );
 
 CREATE TABLE order_requests
@@ -29,8 +28,8 @@ CREATE TABLE order_requests
 );
 
 INSERT INTO users
-    (email, username)
+    (email , username)
 VALUES
     ('test@test.com', 'username'),
-    ('test1@test1.com', 'username1'),
-    ('test2@test2.com', 'username2');
+    ('test1@test.com','username1'),
+    ('test2@test.com','username2');
