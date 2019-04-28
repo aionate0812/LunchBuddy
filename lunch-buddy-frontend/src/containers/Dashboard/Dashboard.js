@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const root = 'http://localhost:5000'
 const orderRequestsEndpointBase = '/order_request/'
+const ordersEndpointBase = '/orders/'
 
 const getOrderInvitations = (user_id) => {
     return axios({
@@ -12,8 +13,11 @@ const getOrderInvitations = (user_id) => {
     })
 }
 
-const getOrdersCreated = () => {
-
+const getOrdersCreated = (user_id) => {
+    return axios({
+        url:`${ordersEndpointBase}user/${user_id}`,
+        baseURL:root
+    })
 }
 
 
@@ -30,7 +34,8 @@ class Dashboard extends React.Component {
     async componentDidMount() {
         // const user = localStorage.getItem('user')
         const orderInvitations = await getOrderInvitations(2)
-        this.setState({order_invitations:orderInvitations.data.orders})
+        const ordersCreated = await getOrdersCreated(2)
+        this.setState({order_invitations:orderInvitations.data.orders, orders_created:ordersCreated.data.orders})
 
     }
 
@@ -64,7 +69,7 @@ class Dashboard extends React.Component {
                         <ul>
                             {
                                 orders_created.map( (order, i) => {
-                                    const {id, name:order_name, restaurant_name} = order
+                                    const {id, order_name, restaurant_name} = order
                                     return(
                                         <li key={i}>
                                             <Link to={`/order/${id}`}>{order_name}</Link>
