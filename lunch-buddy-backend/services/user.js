@@ -1,4 +1,5 @@
-const db = require('./dbConnect')
+const  db  = require('./dbConnect')
+
 
 const UserService = {}
 

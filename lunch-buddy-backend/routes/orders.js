@@ -15,6 +15,17 @@ ordersRouter.get('/:order_id', (req, res) => {
     })
 })
 
+ordersRouter.get('/user/:user_id', (req, res) => {
+    const {user_id} = req.params
+    ordersRouterService.getAllOrdersFromUser(user_id)
+    .then( orders => {
+        res.json({orders})
+    }, err => {
+        res.json({mgs:'Could not get orders'})
+        console.log(err)
+    })
+})
+
 ordersRouter.post('/', (req, res) => {
     const { user_id } = req.body
 
