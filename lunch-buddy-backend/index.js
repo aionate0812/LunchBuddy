@@ -7,14 +7,15 @@ const port = 5000
 
 const orderRequestsRouter = require('./routes/order_requests')
 const userRouter = require('./routes/user')
+const ordersRouter = require('./routes/orders')
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 
-
-app.use('/order_requests', orderRequestsRouter)
+app.use('/orders', ordersRouter)
+app.use('/order_request', orderRequestsRouter)
 app.use('/user', userRouter)
 
 
