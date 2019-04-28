@@ -27,18 +27,6 @@ class Menuview extends React.Component {
     }
   }
 
-  //clicker 
-  //state of placeorder
-  // selectingOrder=(e,idx)=>{
-  //     const currentOrder=this.state.placedOrder[idx]
-  //     let array=[...this.state.placedOrder];
-  //     let index=array.indexOf(currentOrder)
-  //     // console.log('idx',idx)
-  //     if(idx !==-1){
-  //       array.splice(idx,1);
-  //       this.setState({placedOrder:array})
-  //     }
-  //   }
 
 
   // ------------map through the dishes
@@ -66,14 +54,17 @@ class Menuview extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    //if clicked is unclicked-----> remove that from array placedOrder
   }
 
   render() {
-    // console.log('checked',this.state)
-    
-    console.log("foodarray", this.state.placedOrder)
-    //console.log('here',seek())
+
+//  ? :
+/* 
+function getUser(user==user){
+  return (username? "username": "user not logged in")
+}
+*/
+
     return (
       <>
         <h2>Le Carte</h2>
