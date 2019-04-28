@@ -13,19 +13,11 @@ CREATE TABLE users
 CREATE TABLE orders (
 
     id SERIAL PRIMARY KEY,
-
     order_name VARCHAR NOT NULL,
-
     order_creator INT REFERENCES users(id),
-<<<<<<< HEAD
-
-    order_status VARCHAR NOT NULL, 
+    order_status VARCHAR NOT NULL,
     restaurant_id INT NOT NULL,
     restaurant_name VARCHAR NOT NULL
-
-=======
-    order_status VARCHAR NOT NULL
->>>>>>> a43fb4b8b16db04ef8b4b2c48f7072532b150ef3
 );
 
 CREATE TABLE order_requests
