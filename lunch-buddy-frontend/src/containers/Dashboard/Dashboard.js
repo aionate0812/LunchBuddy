@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import OwedNoti from '../../components/OwedNoti/OwedNoti';
+import OwedNoti from '../../components/OwedNoti/OwedNoti'
+import healthyBackground from '../../assets/healthy-lunch.jpg'
 
-const root = 'http://localhost:5000'
+const root = 'http://zhost:5000'
 const orderRequestsEndpointBase = '/order_request/'
 const ordersEndpointBase = '/orders/'
 
@@ -26,7 +27,7 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            user:{},
+            user: [],
             order_invitations:[],
             orders_created:[]
         }
@@ -46,18 +47,22 @@ class Dashboard extends React.Component {
 
     render() {
         const { user, order_invitations, orders_created } = this.state
+        console.log("User", this.state.user)
         return (
             <>
-
-                <div className='container mt-5'>
+                <div className='container-fluid mt-5' style={{fontFamily: "Arvo"}}>
+                <div className='container-fluid' style={{backgroundImage: `url(${healthyBackground})`, color: "brown" }}>
+                    <h1 style={{textAlign: "center", fontWeight: "bold"}} className="mb-5">Welcome {user.input}</h1>
+                </div>
                 <div className='row'>
-                    <h1>Welcome {user.username}</h1>
+                <div className="col">
                     <div aria-live="polite" aria-atomic="true" style={{ "position": "relative", "min-height": "0" }}>
                     <div style={{ "position": "absolute", "top": "0", "right": "0" }}>
                         <OwedNoti />
                      </div>
                 </div>
-                        <div className='row mt-4 justify-content-around'>
+                </div>
+                        <div className='col justify-content-around'>
                             <div style={{height:'300px'}}>
                                 <h5>Order Invitations:</h5>
                                 <ul className='list-group mt-3'>
@@ -87,7 +92,7 @@ class Dashboard extends React.Component {
                                             <li className='list-group-item' key={i}>
                                                 <Link to={`/order/${id}/invite`}>{order_name}</Link>
                                                 <ul>
-                                                    <li><strong>Restauranst</strong> {restaurant_name}</li>
+                                                    <li><strong>Restaurant</strong> {restaurant_name}</li>
                                                 </ul>
                                             </li>
                                         )
