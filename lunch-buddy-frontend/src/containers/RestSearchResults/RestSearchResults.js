@@ -82,7 +82,6 @@ class RestaurantSearchResults extends React.Component {
 
 
     render () {
-      console.log("Mickey", this.props.match.url.split('/')[2])
         return(
             <div className="container">
             {
@@ -117,7 +116,7 @@ class RestaurantSearchResults extends React.Component {
                }
                </div>
              </div>
-             </> : <Redirect to='/login'/> 
+             </> : <Redirect to='/'/> 
             }
             </div>
         )

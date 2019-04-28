@@ -1,8 +1,6 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 
-const createOrder = () =>{
-
-}
 
 class Order extends React.Component {
     constructor(props) {
@@ -20,17 +18,18 @@ class Order extends React.Component {
       }
 
     handleClick = (e) =>{
-        //
+        this.props.history.push('/search')
     }
 
     render() {
+        console.log(this.state.user)
         return(
             <> {
                 this.state.user !== null ?                 
                 <div className="container-fluid" style={{margin: "auto auto"}}>
                 <h3 >Today's A Good Day For A Delicious Meal With Friends</h3>
                 <button type="button" class="btn btn-info" onClick={this.handleClick}>Create Order</button>
-                </div> : null
+                </div> : <Redirect to='/'/>
             }
             </>
         )
