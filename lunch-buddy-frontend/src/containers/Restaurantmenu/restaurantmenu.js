@@ -1,6 +1,6 @@
 import React from 'react';
 // import axios from 'axios';
-import Food from '../components/menuitem'
+import Food from '../../components/menuitem'
 
 class Menuview extends React.Component {
   constructor(props) {
@@ -29,6 +29,16 @@ class Menuview extends React.Component {
   
     //clicker 
     //state of placeorder
+  // selectingOrder=(e,idx)=>{
+  //     const currentOrder=this.state.placedOrder[idx]
+  //     let array=[...this.state.placedOrder];
+  //     let index=array.indexOf(currentOrder)
+  //     // console.log('idx',idx)
+  //     if(idx !==-1){
+  //       array.splice(idx,1);
+  //       this.setState({placedOrder:array})
+  //     }
+  //   }
 
   
   // ------------map through the dishes
@@ -40,36 +50,41 @@ class Menuview extends React.Component {
     })
   }
 
-  handleClicker=(e)=>{
+  handleClicker=(e,idx)=>{
     const {placedOrder}=this.state
-   //  const{dish_id,name,price}=this.props 
-    /* placedOrder.push({
-       dishId: dish_id,
-       nameofFood: name,
-       foodPrice: price
-     })*/
+
+    const currentOrder=this.state.placedOrder[idx]
+    let array=[...this.state.placedOrder];
+    let index=array.indexOf(currentOrder)
+    if(idx !==-1){
+      array.splice(idx,1);
+      this.setState({placedOrder:array})
+    }
+
  
  //pass my clicker in here 
  if(!this.state.placedOrder.includes(e.target.value)){
    this.setState({placedOrder: this.state.placedOrder.concat(e.target.value)})
  }
+ 
  }
 
   handleClick=(e)=>{
     e.preventDefault();
+    //if clicked is unclicked-----> remove that from array placedOrder
   }
 
   render() {
     console.log('checked',this.state)
-    // console.log("foodarray", this.showDishes())
+    // console.log("foodarray", this.state.placedOrder)
     return (
       <>
+      <h2>Le Carte</h2>
      {
        this.state.itemsOrdered.map((e,i)=>{
-         return <Food {...e} key={i} index={i} isClicking={this.handleClicker} /> 
+         return <Food {...e} key={i} index={i} isClicking={this.handleClicker} />
        })
      } 
-
       <button type="button" className="btn btn-dark" onClick={this.handleClick}>Place Order</button>
      
       </>
