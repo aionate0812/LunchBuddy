@@ -54,33 +54,6 @@ class UserLogin extends React.Component {
 
     }
 
-    handleCreateSubmit = (e) => {
-        e.preventDefault()
-
-        axios.post('http://localhost:5000/user/create', {
-            username: this.state.createUsername,
-            email: this.state.createEmail
-        })
-            .then(res => {
-                console.log(res)
-                this.setState({
-                    user_id: res.data.data.id,
-                })
-            })
-            .then(() => {
-                console.log(this.state)
-                localStorage.setItem('user', JSON.stringify(this.state))
-            })
-            .then(() => {
-                this.props.history.push('/dashboard')
-            })
-            .catch(err => {
-                this.setState({
-                    error: err.toString()
-                })
-            })
-    }
-
     render() {
         return (
             <>

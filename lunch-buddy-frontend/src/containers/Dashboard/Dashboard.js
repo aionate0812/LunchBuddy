@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import OwedNoti from '../../components/OwedNoti/OwedNoti';
 
-const root = 'http://localhost:5000'
+const root = 'http://zhost:5000'
 const orderRequestsEndpointBase = '/order_request/'
 const ordersEndpointBase = '/orders/'
 
