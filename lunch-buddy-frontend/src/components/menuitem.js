@@ -19,9 +19,9 @@ class Food extends React.Component{
 
     return (
       <><form>
-        <div class="form-check">
-    <input type="checkbox" value={`name: ${name}, price:${price}`} class="form-check-input" id={index} onClick={isClicking}/>
-    <label class="form-check-label" for={index}>
+        <div className="form-check">
+    <input type="checkbox" value={`name: ${name}, price:${price}`} className="form-check-input" id={index} onClick={isClicking}/>
+    <label className="form-check-label" htmlFor={index}>
     {name} {price}
     </label>
   </div>
