@@ -44,7 +44,6 @@ class UserLogin extends React.Component {
                 })
             })
 
-<<<<<<< HEAD
     }
 
     handleCreateSubmit = (e) => {
@@ -72,8 +71,6 @@ class UserLogin extends React.Component {
                     error: err.toString()
                 })
             })
-=======
->>>>>>> master
     }
 
     render() {
