@@ -1,6 +1,18 @@
-import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import React from 'react';
 import axios from 'axios'
+import firebase from 'firebase'
+
+var config = {
+    apiKey: "AIzaSyDLXuWNECdHcAVOINQMVYNeVQkmT62avpI",
+    authDomain: "lunch-buddy-f49d0.firebaseapp.com",
+    databaseURL: "https://lunch-buddy-f49d0.firebaseio.com",
+    projectId: "lunch-buddy-f49d0",
+    storageBucket: "lunch-buddy-f49d0.appspot.com",
+    messagingSenderId: "193579430030"
+  };
+  firebase.initializeApp(config);
+  
+  var db = firebase.firestore();
 
 const root = 'http://localhost:5000'
 const orderRequestEndpointBase = '/order_request/'
@@ -24,14 +36,15 @@ const getOrderRequestsByOrderId = (order_id) => {
     })
 }
 
-const createOrderRequest = (order_id, user_id) =>{
+const createOrderRequest = (order_id, user_id, username) =>{
     return axios({
         method: "post",
         url: `${orderRequestEndpointBase}`,
         baseURL:root,
         data: {
             order_id: order_id,
-            user_id: user_id
+            user_id: user_id,
+            username:username
         }
     })
 }
@@ -52,12 +65,28 @@ class InviteUsers extends React.Component {
 
     async componentDidMount() {
         
+        // var orderRequestsWatcher = database.ref('order_requests')
+        // orderRequestsWatcher.on('value', (snapshot)=>{
+        // console.log(snapshot.val());
+        // })
+
+        db.collection("order_requests").where("order_id", "==", this.props.match.params.id)
+        .onSnapshot(function(querySnapshot) {
+        var orders = [];
+        querySnapshot.forEach(function(doc) {
+            orders.push(doc.data());
+        });
+        console.log("Current orders ", orders);
+    });
+
         const orderRequests = await getOrderRequestsByOrderId(this.props.match.params.id)
         console.log(orderRequests, this.props.match.params.id)
         this.setState({
-            order_requests:orderRequests.data.order_requests, 
+            order_requests:orderRequests.data.orders, 
             order:this.props.match.params.id,
             user: JSON.parse(localStorage.getItem('user')) || null,
+        }, ()=>{
+            console.log(this.state)
         })
         
     }
@@ -69,12 +98,11 @@ class InviteUsers extends React.Component {
     handleAdd = async (e) => {
         e.preventDefault();
         const user = await getUser(this.state.input)
-        console.log(user.data.data.id)
-        await createOrderRequest(this.state.order, user.data.data.id)
+        createOrderRequest(this.state.order, user.data.data.id, user.data.data.username)
         const orderRequests = await getOrderRequestsByOrderId(this.props.match.params.id)
         console.log(orderRequests, this.props.match.params.id)
         this.setState({
-            order_requests:orderRequests.data.order_requests, 
+            order_requests:orderRequests.data.orders, 
             input: ""
         })
         
@@ -98,7 +126,7 @@ class InviteUsers extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container mt-5">
                 {
                     this.state.user !== null ?
                         <form>
@@ -124,7 +152,7 @@ class InviteUsers extends React.Component {
                             <li key={i}>
                                 <span>{orderRequest.username}</span>
                                 <ul>
-                                    <li>{orderRequest.order_items?orderRequest.order_items:'No items yet!'}</li>
+                                    {/*<li>{orderRequest.order_items?orderRequest.order_items:'No items yet!'}</li>*/}
                                 </ul>
                             </li>
                         )

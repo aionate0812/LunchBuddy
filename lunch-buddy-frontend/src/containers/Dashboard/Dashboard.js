@@ -48,43 +48,45 @@ class Dashboard extends React.Component {
             <>
                 <div className='container mt-5'>
                     <h1>Welcome {user.username}</h1>
-                    <div className='mt-5'>
-                        <h5>Order Invitations:</h5>
-                        <ul className='mt-3'>
-                            {
-                                order_invitations.map( (order, i) => {
-                                    const {id, order_name, restaurant_name, order_creator_name} = order
-                                    return (
-                                        <li key={i}>
-                                            <Link to={`/order/${id}`}>{order_name}</Link>
-                                            <ul>
-                                                <li>{restaurant_name}</li>
-                                                <li>{order_creator_name}</li>
-                                            </ul>
-                                        </li>
-                                    ) 
-                                })
-                            }
-                        </ul>
-                    </div>
-                    <div>
-                        <h5>Orders Created:</h5>
-                        <ul>
-                            {
-                                orders_created.map( (order, i) => {
-                                    const {id, order_name, restaurant_name} = order
-                                    return(
-                                        <li key={i}>
-                                            <Link to={`/order/${id}/invite`}>{order_name}</Link>
-                                            <ul>
-                                                <li>{restaurant_name}</li>
-                                            </ul>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    </div>
+                        <div className='row mt-4 justify-content-around'>
+                            <div style={{height:'300px'}}>
+                                <h5>Order Invitations:</h5>
+                                <ul className='list-group mt-3'>
+                                    {
+                                        order_invitations.map( (order, i) => {
+                                            const {id, order_name, restaurant_name, order_creator_name} = order
+                                            return (
+                                                <li className='list-group-item' key={i}>
+                                                    <Link to={`/order/${id}`}>{order_name}</Link>
+                                                    <ul>
+                                                        <li><strong>Restaurant:</strong> {restaurant_name}</li>
+                                                        <li><strong>Host:</strong> {order_creator_name}</li>
+                                                    </ul>
+                                                </li>
+                                            ) 
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div style={{height:'300px'}}>
+                                <h5>Orders Created:</h5>
+                                <ul className='list-group mt-3'>
+                                {
+                                    orders_created.map( (order, i) => {
+                                        const {id, order_name, restaurant_name} = order
+                                        return(
+                                            <li className='list-group-item' key={i}>
+                                                <Link to={`/order/${id}/invite`}>{order_name}</Link>
+                                                <ul>
+                                                    <li><strong>Restauranst</strong> {restaurant_name}</li>
+                                                </ul>
+                                            </li>
+                                        )
+                                    })
+                                }
+                                </ul>
+                            </div>
+                        </div>
                 </div>
             </>
         )
