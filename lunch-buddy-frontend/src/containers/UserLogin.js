@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import {background} from '../assets/healthy-lunch.jpg'
 
 class UserLogin extends React.Component {
     state = {
@@ -46,7 +47,7 @@ class UserLogin extends React.Component {
         return (
             <>
                 <br />
-                <div className="col-xs-12" style={{ "height": "75px", "textAlign": "center" }}>Please Login to Find Your Lunch Buddy</div>
+                <div className="col-xs-12 py-2" style={{ height: "40px", textAlign: "center", backgroundColor: "black", color: "white"}}>Please Login to Find Your Lunch Buddy</div>
                 <div className='container my-auto'>
                     <div className='row'>
                     {
