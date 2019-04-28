@@ -65,7 +65,7 @@ class InviteUsers extends React.Component {
         return (
             <div className="container">
                 {
-                    this.state.user === null ?
+                    this.state.user !== null ?
                         <form>
                             <div class="form-group">
                             <div className="row">
@@ -81,7 +81,7 @@ class InviteUsers extends React.Component {
                             <button type="submit" class="btn btn-primary mt-3">Submit</button>
                             </div>
                         </form> 
-                    : null//<Redirect to='/' />
+                    : <Redirect to='/' />
                 }
                 {
                     this.state.invitees.length>0 ? this.state.invitees.map((e,i)=>{
