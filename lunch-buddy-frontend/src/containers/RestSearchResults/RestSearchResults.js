@@ -117,7 +117,7 @@ class RestaurantSearchResults extends React.Component {
                }
                </div>
              </div>
-             </> : <Redirect to='/login'/> 
+             </> : <Redirect to='/'/> 
             }
             </div>
         )
