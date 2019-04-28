@@ -8,9 +8,9 @@ menuRouter.get('/', (req, res) => {
 
     axios.get(url, {
         params: {
-            'user-key': 'cd295cc49e5c8dfd776d34174be1b9af',
-            res_id: res_id,
-        }
+            res_id,
+        },
+        headers: { user_key: 'cd295cc49e5c8dfd776d34174be1b9af' }
     })
         .then(res => {
             console.log(res)
