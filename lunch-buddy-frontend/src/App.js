@@ -8,7 +8,6 @@ import SearchResults from './containers/RestSearchResults/RestSearchResults';
 import Order from './containers/Order/Order'
 import Dashboard from './containers/Dashboard/Dashboard'
 
-
 class App extends Component {
   render() {
     return (
@@ -16,12 +15,12 @@ class App extends Component {
         <HashRouter>
           <Route path='/' component={NavBar} />
           <Switch>
-            <Route path='/' exact component={UserLogin} />
+          <Route path='/' exact component={UserLogin} />
             <Route path='/menuview' exact component={Menuview} />
-            <Route path='/order/:id/search/results' exact component={SearchResults} />
-            <Route path='/order/:id' exact component={Order} />
+            <Route path='/search/results' exact component={SearchResults} />
+            <Route path='/order/:id' exact />
+            <Route path='/order' exact component={Order} />
             <Route path='/dashboard' exact component={Dashboard} />
-
           </Switch>
         </HashRouter>
       </>
