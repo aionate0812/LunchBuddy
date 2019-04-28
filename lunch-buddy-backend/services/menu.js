@@ -10,10 +10,11 @@ menuRouter.get('/', (req, res) => {
         params: {
             res_id,
         },
-        headers: { user_key: 'cd295cc49e5c8dfd776d34174be1b9af' }
+        headers: { 'user_key': 'cd295cc49e5c8dfd776d34174be1b9af' }
     })
-        .then(res => {
-            console.log(res)
+        .then(response => {
+            res.json({ data: response.data })
+            console.log(response.data.daily_menus[0].daily_menu.dishes[0])
         })
         .catch(error => {
             console.log(error);
