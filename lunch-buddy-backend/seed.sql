@@ -17,11 +17,15 @@ CREATE TABLE orders (
     order_name VARCHAR NOT NULL,
 
     order_creator INT REFERENCES users(id),
+<<<<<<< HEAD
 
     order_status VARCHAR NOT NULL, 
     restaurant_id INT NOT NULL,
     restaurant_name VARCHAR NOT NULL
 
+=======
+    order_status VARCHAR NOT NULL
+>>>>>>> a43fb4b8b16db04ef8b4b2c48f7072532b150ef3
 );
 
 CREATE TABLE order_requests
@@ -33,18 +37,9 @@ CREATE TABLE order_requests
     total INT NULL
 );
 
-CREATE TABLE orders
-(
-    id SERIAL PRIMARY KEY,
-    order_name VARCHAR NOT NULL,
-    order_creator INT REFERENCES users(id),
-    order_status VARCHAR NOT NULL,
-    restaurant_id INT NOT NULL
-);
-
 INSERT INTO users
-    (email, username)
+    (email , username)
 VALUES
     ('test@test.com', 'username'),
-    ('test1@test1.com', 'username1'),
-    ('test2@test2.com', 'username2');
+    ('test1@test.com','username1'),
+    ('test2@test.com','username2');
