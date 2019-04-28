@@ -6,7 +6,7 @@ const ordersRouterService = require('../services/orders')
 ordersRouter.get('/:order_id', (req, res) => {
     const {order_id} = req.params
 
-    ordersRouterService.getOrderById(order_id)
+    ordersRouterService.readOrder(order_id)
     .then( order => {
         res.json({order})
     }, err => {
