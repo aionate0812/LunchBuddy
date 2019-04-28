@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import {Redirect, Link} from 'react-router-dom';
 
-const read = () =>{
+const port = 5000
 
+const read = () =>{
+    return axios ({
+        method: "get",
+        url: `http://localhost:${port}/orders`,
+    })
 }
 
 
