@@ -12,7 +12,7 @@ const SearchBar = (props) => {
                 <small id="emailHelp" class="form-text text-muted">What Are You Interested In Ordering</small>
             </div>
             <div  className="col-2" style={{margin: "auto 0"}}>
-            <button type="submit" class="btn btn-primary" onClick={props.search}>Submit</button>
+            <button type="submit" class="btn btn-dark" onClick={props.search}>Submit</button>
             </div>
             </div>
             </div>

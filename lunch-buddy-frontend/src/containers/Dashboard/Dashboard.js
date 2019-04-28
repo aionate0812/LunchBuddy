@@ -51,13 +51,13 @@ class Dashboard extends React.Component {
         return (
             <>
                 <div className='container-fluid mt-5' style={{fontFamily: "Arvo"}}>
-                <div className='container-fluid' style={{backgroundImage: `url(${healthyBackground})`, color: "brown" }}>
+                <div className='container-fluid' style={{backgroundImage: `url(${healthyBackground})`, color: "white" }}>
                     <h1 style={{textAlign: "center", fontWeight: "bold"}} className="mb-5">Welcome {user.input}</h1>
                 </div>
                 <div className='row'>
                 <div className="col">
-                    <div aria-live="polite" aria-atomic="true" style={{ "position": "relative", "min-height": "0" }}>
-                    <div style={{ "position": "absolute", "top": "0", "right": "0" }}>
+                    <div aria-live="polite" aria-atomic="true" style={{ "position": "absolute", "min-height": "0" }}>
+                    <div style={{ "position": "relative", "top": "0", "right": "0" }}>
                         <OwedNoti />
                      </div>
                 </div>
@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
                                             return (
                                                 <li className='list-group-item' key={i}>
                                                     <Link to={`/order/${id}`}>{order_name}</Link>
-                                                    <ul>
+                                                    <ul style={{border: "1px solid gray"}}>
                                                         <li><strong>Restaurant:</strong> {restaurant_name}</li>
                                                         <li><strong>Host:</strong> {order_creator_name}</li>
                                                     </ul>
