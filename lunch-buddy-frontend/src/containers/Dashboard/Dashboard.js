@@ -7,7 +7,7 @@ const orderRequestsEndpointBase = '/order_requests/'
 
 const getOrderInvitations = (user_id) => {
     return axios({
-        url:`${orderRequestsEndpointBase}${user_id}`,
+        url:`${orderRequestsEndpointBase}user/orders/${user_id}`,
         baseURL:root
     })
 }
