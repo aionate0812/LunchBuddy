@@ -1,6 +1,6 @@
 import React from 'react';
 // import axios from 'axios';
-import Food from '../components/menuitem'
+import Food from '../../components/menuitem'
 
 class Menuview extends React.Component {
   constructor(props) {

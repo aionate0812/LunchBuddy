@@ -3,7 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import UserLogin from './containers/UserLogin';
-import Menuview from './containers/restaurantmenu';
+import Menuview from './containers/Restaurantmenu/restaurantmenu';
 import SearchResults from './containers/RestSearchResults/RestSearchResults';
 import Order from './containers/Order/Order'
 import Dashboard from './containers/Dashboard/Dashboard'
