@@ -21,6 +21,7 @@ class App extends Component {
             <Route path='/search/results' exact component={SearchResults} />
             <Route path='/search' exact />
             <Route path='/order/:id' exact />
+            <Route path='/order/:id/invite'/>
             <Route path='/order' exact component={Order} />
             <Route path='/dashboard' exact component={Dashboard} />
             <Route component={Error404} />
