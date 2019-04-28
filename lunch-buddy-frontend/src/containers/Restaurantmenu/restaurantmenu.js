@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import Food from '../../components/menuitem'
 
 class Menuview extends React.Component {
@@ -10,23 +10,48 @@ class Menuview extends React.Component {
       itemsOrdered: [
         {
           "dish_id": "108",
-          "name": "papa a la vodka",
-          "price": "149 Kč"
+          "name": "Overboard Omelet",
+          "price": 8.45
         },
         {
           "dish_id": "105",
-          "name": "potato potatoe",
-          "price": "149 million"
+          "name": "Block Breakfast Sandwich",
+          "price": 6.5
         },
         {
           "dish_id": "104",
-          "name": "pizza fries",
-          "price": "156 thousand"
+          "name": "Ensign Egg Platter",
+          "price": 8
+        },
+        {
+          "dish_id": "101",
+          "name": "Fathom French Toast",
+          "price": 7.5
+        },
+        {
+          "dish_id": "102",
+          "name": "Buccaneer BLT",
+          "price": 7.5
+        },
+        {
+          "dish_id": "103",
+          "name": "Buoy Bagel with Cream Cheese",
+          "price": 3
         }
+
       ]
     }
   }
 
+componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('user'))
+    if (user) {
+      console.log('user',user)
+        this.props.history.push(`/menuview/${user.user_id}`)
+
+    }
+   
+}
 
 
   // ------------map through the dishes
@@ -54,17 +79,13 @@ class Menuview extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault();
+    
   }
 
   render() {
 
-//  ? :
-/* 
-function getUser(user==user){
-  return (username? "username": "user not logged in")
-}
-*/
-
+    console.log('placedorderStuff',this.state.placedOrder)
+    /* id, order_id,user_id,order_items, total */
     return (
       <>
         <h2>Le Carte</h2>
