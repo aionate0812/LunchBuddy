@@ -105,14 +105,17 @@ class Menuview extends React.Component {
     console.log("State", this.state)
      return (
       <>
-      <h2>Le Carte</h2>
+      <div className="container" style={{fontFamily: "Arvo"}}>
+      <div className="row">
+      <h2 className="my-3">Le Carte</h2>
+      </div>
      {
        this.state.items.length > 0 ? this.state.items.map((e,i)=>{
          return <Food {...e} key={i} index={i} isClicking={this.handleClicker} />
        }) : null
      } 
-      <button type="button" className="btn btn-dark" onClick={this.handleClick}>Place Order</button>
-     
+      <button type="button" className="btn btn-success mt-3" onClick={this.handleClick}>Place Order</button>
+     </div>
       </>
     )
   }

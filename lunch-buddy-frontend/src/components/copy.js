@@ -28,8 +28,8 @@ class Food extends React.Component {
                                                     <div className="col-11">
                                                         {name}
                                                     </div>
-                                                    <div className="col-1">
-                                                        {price}
+                                                    <div className="col-1" style={{color: "maroon"}}>
+                                                        ${price}
                                                     </div>
                                                 </div>
                                             </label>

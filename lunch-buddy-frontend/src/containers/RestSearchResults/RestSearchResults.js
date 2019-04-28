@@ -19,6 +19,18 @@ const port = 5000
   })
 }*/
 
+const imgArray = ['healthy-lunch.png', 'healthy-lunch1.png', 'healthy-lunch2.png', 'healthy-lunch3.png', 'healthy-lunch4.png', 'healthy-lunch5.png'];
+const basePath='../../assets';
+
+function imgRandom() {
+    for (let i = 0; i < 18; i++) {
+        const rand = imgArray[Math.floor(Math.random() * imgArray.length)];
+        const image = new Image();
+        image.src = basePath+rand;
+        document.body.appendChild(image);
+    }
+}
+
 const menu = (res_id) =>{
   return axios({
     method: "get", 
@@ -59,7 +71,18 @@ const search = (query, lat, lon, count=10) =>{
   })
 }
 
- const image = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTBROkHgxHvy24l2E3ccmm9JirhdfIOK3VcCf8JpAXBT0UkHmHxA`;
+const searchRes = (res_id) =>{
+  return axios({
+    method: "get", 
+    url: `https://cors-anywhere.herokuapp.com/https://developers.zomato.com/api/v2.1/restaurant`,
+    params: {
+      res_id: res_id
+    },
+    headers: { 'user-key': 'cd295cc49e5c8dfd776d34174be1b9af' }
+  })
+}
+
+ const image = `https://www.tasteofhome.com/wp-content/uploads/2018/04/Sesame-Chicken-Slaw-Salad_EXPS_HCKA18_53392_C10_20_2b-1-696x696.jpg`;
 
 class RestaurantSearchResults extends React.Component {
     state = {
@@ -110,14 +133,14 @@ class RestaurantSearchResults extends React.Component {
 
     render () {
         return(
-            <div className="container">
+            <div className="container" style={{fontFamily: "Arvo"}}>
             <Search found={this.state.resultsFound} results={this.state.results} search={this.handleSearch} change={this.handleOnChange} input={this.state.input}/>
             {
              this.state.user !== null ? <>
               {
 
               }
-             <div className="row my-4">Results: {this.state.resultsFound}</div>
+             <div className="row my-4">Results: {this.state.resultsFound === 0 ? <p> Top Restaurants in Astoria</p>: this.state.resultsFound.length}</div>
              <div className="row">
                <div className="col card">
                {
@@ -128,14 +151,14 @@ class RestaurantSearchResults extends React.Component {
                          <img src={e.restaurant.featured_image||e.restaurant.featured_image||image} alt={e.restaurant.name} style={{height: "100px"}}/>
                        </div>
                        <div className="col-3">
-                         <p>{e.restaurant.name}</p>
+                         <h4>{e.restaurant.name}</h4>
                          <p> Cusine {e.restaurant.cuisines}</p>
                        </div>
-                       <div className="col-3">
+                       <div className="col-3" style={{fontSize: "12px"}}>
                          <p> Rated {e.restaurant.user_rating.aggregate_rating}/5</p>
                          <p> {e.restaurant.user_rating.votes} Votes</p>
                        </div>
-                       <div className="col-3">
+                       <div className="col-3" style={{fontSize: "13px"}}>
                        <p>{e.restaurant.location.address}</p>
                        <p>{e.restaurant.location.locality}</p>
                        <p>{e.restaurant.location.city}, {e.restaurant.location.zipcode}</p>
