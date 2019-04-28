@@ -10,12 +10,14 @@ CREATE TABLE users
     username VARCHAR NOT NULL UNIQUE
 );
 
-CREATE TABLE orders
-(
+CREATE TABLE orders (
+
     id SERIAL PRIMARY KEY,
     order_name VARCHAR NOT NULL,
     order_creator INT REFERENCES users(id),
-    order_status VARCHAR NOT NULL
+    order_status VARCHAR NOT NULL,
+    restaurant_id INT NOT NULL,
+    restaurant_name VARCHAR NOT NULL
 );
 
 CREATE TABLE order_requests
