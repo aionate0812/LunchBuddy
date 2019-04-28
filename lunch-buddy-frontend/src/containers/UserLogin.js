@@ -9,6 +9,13 @@ class UserLogin extends React.Component {
         error: ''
     }
 
+    componentDidMount() {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user) {
+            this.props.history.push('/dashboard')
+        } 
+    }
+    
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
         console.log(this.state)
@@ -24,7 +31,8 @@ class UserLogin extends React.Component {
                 console.log(res)
                 this.setState({
                     user_id: res.data.data.id,
-                    email: res.data.data.email
+                    email: res.data.data.email,
+                    username:res.data.data.username
                 })
             })
             .then(() => {

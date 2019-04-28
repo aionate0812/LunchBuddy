@@ -16,7 +16,7 @@ orderRequestsRouter.get('/:id', (req, res) => {
     })
 })
 
-orderRequestsRouter.get('orders/:order_id', (req, res) => {
+orderRequestsRouter.get('/orders/:order_id', (req, res) => {
     const { order_id } = req.params
 
     orderRequestsService.getOrderRequestsByOrderId(order_id)

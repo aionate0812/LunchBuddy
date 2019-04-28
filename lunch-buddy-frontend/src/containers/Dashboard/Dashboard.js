@@ -25,18 +25,21 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            user:{username:'Alex'},
+            user:{},
             order_invitations:[],
-            orders_created:[{id:1, name:'Taco Tuesday', restaurant_name:'Tacos Trejo', order_creator_name:'Alex', }]
+            orders_created:[]
         }
     }
 
     async componentDidMount() {
-        // const user = localStorage.getItem('user')
-        const orderInvitations = await getOrderInvitations(2)
-        const ordersCreated = await getOrdersCreated(2)
-        this.setState({order_invitations:orderInvitations.data.orders, orders_created:ordersCreated.data.orders})
-
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (!user) {
+            this.props.history.push('/')
+        } else {
+        const orderInvitations = await getOrderInvitations(user.user_id)
+        const ordersCreated = await getOrdersCreated(user.user_id)
+        this.setState({order_invitations:orderInvitations.data.orders, orders_created:ordersCreated.data.orders, user})
+        }
     }
 
     render() {
@@ -65,14 +68,14 @@ class Dashboard extends React.Component {
                         </ul>
                     </div>
                     <div>
-                        <h5>Orders Created</h5>
+                        <h5>Orders Created:</h5>
                         <ul>
                             {
                                 orders_created.map( (order, i) => {
                                     const {id, order_name, restaurant_name} = order
                                     return(
                                         <li key={i}>
-                                            <Link to={`/order/${id}`}>{order_name}</Link>
+                                            <Link to={`/order/${id}/invite`}>{order_name}</Link>
                                             <ul>
                                                 <li>{restaurant_name}</li>
                                             </ul>
