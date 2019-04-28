@@ -4,7 +4,7 @@ const ordersService = {}
 
 
 ordersService.readOrder = (order_id) => {
-    return db.any('SELECT * FROM orders WHERE orders.id=$[order.id]', {order_id})
+    return db.one('SELECT orders.*, users.username AS order_creator_name FROM orders INNER JOIN users ON orders.order_creator = users.id WHERE orders.id=$[order_id]', {order_id})
 }
 
 ordersService.createOrder = (user_id) => {
