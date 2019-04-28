@@ -7,6 +7,7 @@ class UserLogin extends React.Component {
         input: '',
         user_id: '',
         email: '',
+        username: '',
         error: ''
     }
 
@@ -25,7 +26,8 @@ class UserLogin extends React.Component {
                 console.log(res)
                 this.setState({
                     user_id: res.data.data.id,
-                    email: res.data.data.email
+                    email: res.data.data.email,
+                    username: res.data.data.username
                 })
             })
             .then(() => {
@@ -40,7 +42,7 @@ class UserLogin extends React.Component {
                     error: err.toString()
                 })
             })
-            
+
     }
 
     render() {
