@@ -76,7 +76,6 @@ orderRequestsRouter.get('/orders/:order_id', (req, res) => {
     snapshot.forEach(doc => {
         ordersArr.push({order_id:doc.id, ...doc.data()})
     })
-    console.log('orders were hit')
     res.json({orders:ordersArr})
   })
   .catch(err => {
@@ -96,17 +95,30 @@ orderRequestsRouter.get('/orders/:order_id', (req, res) => {
 
 orderRequestsRouter.get('/user/orders/:user_id', async (req, res) => {
     const { user_id } = req.params
+    console.log('orders were hit')
+
     const orderRequests = db.collection('order_requests');
     const query = orderRequests.where('user_id', '==', user_id).get()
     .then(snapshot => {
     if (snapshot.empty) {
+      res.json({orders:[]})
       console.log('No matching documents.');
       return;
     }  
 
+    ordersArr = []
     snapshot.forEach(doc => {
-      console.log(doc.id, '=>', doc.data());
-    });
+        ordersArr.push({order_id:doc.id, ...doc.data()})
+    })
+    ordersArrPromises = ordersArr.map(order => {
+      return ordersService.readOrder(order.order_id)
+    })
+    Promise.all(ordersArrPromises).then( orders => {
+      console.log(orders)
+      res.json({orders})
+    })
+    
+    
   })
   .catch(err => {
     console.log('Error getting documents', err);

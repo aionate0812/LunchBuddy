@@ -7,14 +7,15 @@ const root = 'http://localhost:5000'
 const orderRequestsEndpointBase = '/order_request/'
 const ordersEndpointBase = '/orders/'
 
-const getOrderInvitations = (user_id) => {
+const getOrderInvitations = async (user_id) => {
+    console.log(user_id)
     return axios({
         url: `${orderRequestsEndpointBase}user/orders/${user_id}`,
         baseURL: root
     })
 }
 
-const getOrdersCreated = (user_id) => {
+const getOrdersCreated = async (user_id) => {
     return axios({
         url: `${ordersEndpointBase}user/${user_id}`,
         baseURL: root
@@ -37,11 +38,19 @@ class Dashboard extends React.Component {
         if (!user) {
             this.props.history.push('/')
         } else {
-        const orderInvitations = await getOrderInvitations(user.user_id)
-        const ordersCreated = await getOrdersCreated(user.user_id)
-        console.log(ordersCreated)
-        this.setState({order_invitations:orderInvitations.data.orders, orders_created:ordersCreated.data.orders, user})
+            console.log(user)
+        const ordersCreated = await axios({url: `http://localhost:5000/orders/user/${user.user_id}`})
+        const orderInvitations = await axios({url:`http://localhost:5000/order_request/user/orders/${user.user_id}`})
+        console.log(orderInvitations.data.orders)
+        this.setState({orders_created:ordersCreated.data.orders, order_invitations:orderInvitations.data.orders})
+        // const orderInvitations = await getOrderInvitations(user.user_id)
+        // const ordersCreated = await getOrdersCreated(user.user_id)
+        // console.log(orderInvitations);
+        // console.log(ordersCreated)
+        // this.setState({order_invitations:orderInvitations.data.orders, orders_created:ordersCreated.data.orders, user})
         }
+
+        
     }
 
     render() {
@@ -62,7 +71,7 @@ class Dashboard extends React.Component {
                                 <h5>Order Invitations:</h5>
                                 <ul className='list-group mt-3'>
                                     {
-                                        order_invitations.map( (order, i) => {
+                                        order_invitations.length>0?order_invitations.map( (order, i) => {
                                             const {id, order_name, restaurant_name, order_creator_name} = order
                                             return (
                                                 <li className='list-group-item' key={i}>
@@ -74,6 +83,7 @@ class Dashboard extends React.Component {
                                                 </li>
                                             ) 
                                         })
+                                        :<li>No invites yet</li>
                                     }
                                 </ul>
                             </div>

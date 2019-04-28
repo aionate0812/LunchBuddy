@@ -17,6 +17,7 @@ ordersRouter.get('/:order_id', (req, res) => {
 
 ordersRouter.get('/user/:user_id', (req, res) => {
     const {user_id} = req.params
+    console.log('orders was hit!!')
     ordersRouterService.getAllOrdersFromUser(user_id)
     .then( orders => {
         res.json({orders})
