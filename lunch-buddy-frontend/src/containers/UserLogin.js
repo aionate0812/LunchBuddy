@@ -43,10 +43,8 @@ class UserLogin extends React.Component {
                     error: err.toString()
                 })
             })
-
-<<<<<<< HEAD
-    }
-
+}
+ 
     handleCreateSubmit = (e) => {
         e.preventDefault()
 
@@ -72,8 +70,6 @@ class UserLogin extends React.Component {
                     error: err.toString()
                 })
             })
-=======
->>>>>>> master
     }
 
     render() {
