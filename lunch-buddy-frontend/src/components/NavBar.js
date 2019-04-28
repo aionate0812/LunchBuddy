@@ -11,6 +11,9 @@ const NavBar = props => {
                         <li className="nav-item active">
                             <Link className="nav-link" to="/"> Home </Link>
                         </li>
+                        <li className="nav-item active">
+                            <Link className="nav-link" to="/order"> Create Order </Link>
+                        </li>
                     </ul>
                 </div>
             </nav>
